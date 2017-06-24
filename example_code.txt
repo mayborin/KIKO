@@ -1,0 +1,117 @@
+emptyProg file a  {
+    image x frame y integer z
+    a->x->y; 
+    z<-100;
+    while(z>0){
+        if(z%2==0){
+            y->show;
+        }
+        if((z%2!=0 )| false){
+            y->hide;
+        }
+        sleep 2000; 
+        z<-z-1;
+    }
+}
+
+
+modImage url u {
+    image i image j  frame f 
+    u -> j;  
+    i <- j%128; 
+    i -> f -> show;
+}
+
+subImage url u {
+    image i image j image k frame f 
+    u -> i; 
+    u -> j; 
+    k <- i-j; 
+    k -> f -> show;
+}
+
+addImage url u {
+    image i image j image k frame f 
+    u -> i; 
+    u -> j; 
+    k <- i-j; 
+    k -> f -> show;  
+    sleep 5; 
+    k <- k + i; 
+    k -> f -> show; 
+}
+
+imgMove2 url u {
+    image i frame f 
+    u -> i;i -> f -> show; 
+    sleep 5; 
+    integer x 
+    integer y 
+    x <- screenwidth;
+    y <-  screenheight; 
+    f -> move (x*3/4,y/4) -> show;
+}
+
+imgMove url u {
+    image i frame f 
+    u -> i;
+    i -> f -> show; 
+    sleep 5; 
+    integer x 
+    integer y 
+    f -> xloc -> x; 
+    f -> yloc -> y; 
+    f -> move (x+100,y-100) -> show;
+}
+
+readFromURLandWriteScaledImageToFile url u, file out {
+    image i frame f 
+    u -> scale (3) -> i;
+    i -> f -> show;  
+    i -> out;
+}
+
+readFromURLandWriteToFile2 url u, file out {
+    image i frame f 
+    u -> gray  -> i; 
+    i -> f -> show; 
+    i -> out;
+}
+
+convolveImg url u {
+    image i frame f 
+    u -> i -> convolve -> f -> show;
+}
+
+imgMove2 url u {
+    image i frame f 
+    u -> i;
+    i -> f -> show; 
+    sleep 5; 
+    integer x 
+    integer y 
+    x <- screenwidth;
+    y <-  screenheight; 
+    f -> move (x*3/4,y/4) -> show;
+}
+
+arArrowGray url u {
+    image i frame f 
+    u -> i |-> gray -> f -> show;
+}
+
+assignImage url u {
+    image i image j frame f 
+    u -> i; 
+    j <- i;
+    j -> f -> show;
+}
+
+assignImageAndFrame url u {
+    image i image i1 frame f frame f1
+    u -> i -> f -> show; 
+    frame f2  
+    i -> scale (3) -> f2 -> show;
+    i1 <- i; 
+    f2 <- f;
+}
