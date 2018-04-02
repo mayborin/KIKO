@@ -18,8 +18,7 @@ The whole design process includes
 
 ```
 comment ::=   /*   NOT(*/)*  */
-token ::= ident  | keyword | frame_op_keyword | filter_op_keyword | image_op_keyword | boolean_literal
- 	| int_literal  | separator  | operator
+token ::= ident  | keyword | frame_op_keyword | filter_op_keyword | image_op_keyword | boolean_literal | int_literal  | separator  | operator
 ident ::= ident_start  ident_part*    (but not reserved)
 ident_start ::=  A .. Z | a .. z | $ | _
 ident_part ::= ident_start | ( 0 .. 9 )
@@ -29,7 +28,7 @@ filter_op_keyword ∷= gray | convolve | blur | scale
 image_op_keyword ∷= width | height 
 frame_op_keyword ∷= xloc | yloc | hide | show | move
 boolean_literal ::= true | false
-separator ::= 	;  | ,  |  (  |  )  | { | }
+separator ::= ; | , | ( | ) | { | }
 operator ::=   	|  | &  |  ==  | !=  | < |  > | <= | >= | +  |  -  |  *   |  /   |  % | !  | -> |  |-> | <-
 ```
 
@@ -40,8 +39,7 @@ Program ∷= List<ParamDec> Block
 ParamDec ∷= type ident
 Block ∷= List<Dec>  List<Statement>
 Dec ∷= type ident
-Statement ∷= SleepStatement | WhileStatement | IfStatement | Chain
-      	| AssignmentStatement
+Statement ∷= SleepStatement | WhileStatement | IfStatement | Chain | AssignmentStatement
 SleepStatement ∷= Expression
 AssignmentStatement ∷= IdentLValue Expression
 Chain ∷= ChainElem | BinaryChain
@@ -53,8 +51,7 @@ ImageOpChain ∷= imageOp Tuple
 BinaryChain ∷= Chain (arrow | bararrow)  ChainElem
 WhileStatement ∷= Expression Block
 IfStatement ∷= Expression Block
-Expression ∷= IdentExpression | IntLitExpression | BooleanLitExpression
-  	| ConstantExpression | BinaryExpression
+Expression ∷= IdentExpression | IntLitExpression | BooleanLitExpression | ConstantExpression | BinaryExpression
 IdentExpression ∷= ident
 IdentLValue ∷= ident
 IntLitExpression ∷= intLit
@@ -75,8 +72,7 @@ ParamDec ∷= type ident  symtab.insert(ident.getText(), ParamDec);
 Block ∷= symtab.enterScope()  List<Dec>  List<Statement>  symtab.leaveScope()
 
 Dec ∷= type ident  symtab.insert(ident.getText(), Dec);
-Statement ∷= SleepStatement | WhileStatement | IfStatement | Chain
-      	| AssignmentStatement
+Statement ∷= SleepStatement | WhileStatement | IfStatement | Chain | AssignmentStatement
         
 SleepStatement ∷= Expression condition: Expression.type==INTEGER
 
